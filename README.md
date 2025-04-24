@@ -13,7 +13,7 @@ Key script activities included:
 - Simulated malware test file (`eicar.ps1`)
 - Fake data exfiltration (`exfiltratedata.ps1`)
 - Network port scanning (`portscan.ps1`)
-- (Optional) Ransomware simulation (`pwncrypt.ps1`)
+- Ransomware simulation (`pwncrypt.ps1`)
 
 ---
 
