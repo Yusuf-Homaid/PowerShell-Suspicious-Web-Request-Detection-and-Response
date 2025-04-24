@@ -30,7 +30,23 @@ DeviceProcessEvents
 | where InitiatingProcessCommandLine contains "Invoke-WebRequest"
 | order by TimeGenerated
 ```
+
+![Screenshot 2025-04-19 170330](https://github.com/user-attachments/assets/518f5c3d-2856-4bf1-98a6-6fc6fe0f0b9c)
+
 ---
+
+---
+![Screenshot 2025-04-19 170515](https://github.com/user-attachments/assets/acb14e0d-9fe4-4a54-b086-8eeaa14a217b)
+
+---
+![Screenshot 2025-04-19 170959](https://github.com/user-attachments/assets/39d5e8bc-551c-43a1-a38e-062907030f66)
+---
+![Screenshot 2025-04-19 172041](https://github.com/user-attachments/assets/15493b99-e2d8-4c4e-94a9-9b160139cc77)
+---
+![Screenshot 2025-04-19 172056](https://github.com/user-attachments/assets/d15a1368-4754-4d52-9a0d-40e6fba6bfb3)
+
+
+
 
 ## 🔔 Alert Configuration
 
@@ -64,21 +80,25 @@ DeviceProcessEvents
 powershell.exe -ExecutionPolicy Bypass -Command Invoke-WebRequest -Uri "<malicious_url>" -OutFile "C:\programdata\<script>.ps1"
 ```
 
+![Screenshot 2025-04-19 172125](https://github.com/user-attachments/assets/ffda49ea-7c90-4085-b039-77b4f9eba550)
+---
+![Screenshot 2025-04-19 184545](https://github.com/user-attachments/assets/b96615f4-23b8-4744-b80d-53a36c17335c)
+---
+---
+![Screenshot 2025-04-19 184654](https://github.com/user-attachments/assets/697180b9-78b1-4efc-bcdc-856c79bd3074)
+
+---
+![Screenshot 2025-04-19 184958](https://github.com/user-attachments/assets/5324098d-d3bd-4a8d-bd6d-f40c023e3510)
+
+---
+
+
 ### 🛠️ Executed Scripts
 - `eicar.ps1` – Antivirus test  
 - `exfiltratedata.ps1` – Simulated exfil  
 - `portscan.ps1` – Internal port scan  
 - `pwncrypt.ps1` – (Ransomware)  
 
-### 🧪 Post-Isolation Query
-```kql
-let ScriptNames = dynamic(["eicar.ps1", "exfiltratedata.ps1", "portscan.ps1", "pwncrypt.ps1"]);
-DeviceProcessEvents
-| where DeviceName == "Yusuf-vm"
-| where FileName == "powershell.exe"
-| where ProcessCommandLine contains "-File" and ProcessCommandLine has_any (ScriptNames)
-| order by TimeGenerated
-```
 
 ## 🛡️ Response Actions
 
@@ -95,8 +115,26 @@ After detecting suspicious PowerShell activity, the following response steps wer
 
 
 
+---
+![Screenshot 2025-04-19 193350](https://github.com/user-attachments/assets/f8ceb592-73e3-4159-89d6-a877af606d1e)
+---
+![Screenshot 2025-04-19 185134](https://github.com/user-attachments/assets/c1eb146f-4737-4e1a-9e63-b30b5f21d8f4)
+--
+![Screenshot 2025-04-19 194425](https://github.com/user-attachments/assets/f9f3225e-afe7-4f35-ba8b-e812a5f105f4)
 
+--
+![Screenshot 2025-04-19 194811](https://github.com/user-attachments/assets/6133517b-3491-47ad-ac3f-d8c1817be7ad)
 
+---
+### 🧪 Post-Isolation Query
+```kql
+let ScriptNames = dynamic(["eicar.ps1", "exfiltratedata.ps1", "portscan.ps1", "pwncrypt.ps1"]);
+DeviceProcessEvents
+| where DeviceName == "Yusuf-vm"
+| where FileName == "powershell.exe"
+| where ProcessCommandLine contains "-File" and ProcessCommandLine has_any (ScriptNames)
+| order by TimeGenerated
+```
 
 ---
 ## 📝 User Interaction
@@ -115,6 +153,9 @@ DeviceProcessEvents
 | order by TimeGenerated
 | project TimeGenerated, AccountName, DeviceName, FileName
 ```
+![Screenshot 2025-04-19 191605](https://github.com/user-attachments/assets/b4bae3bf-030d-4e24-9df8-7bbe4fab5d04)
+
+
 ---
 ##  🧪 Script Review (Malware Reverse Engineering)
 The scripts were submitted to the malware reverse engineering team for analysis. Below are the summaries provided for each script:
